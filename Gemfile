@@ -20,6 +20,9 @@ end
 
 group :test, :development do
   gem 'dotenv', '~> 2.0'
+  gem 'byebug'
+  gem 'awesome_print'
+  gem 'pry'
 end
 
 group :test do
