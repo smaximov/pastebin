@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
+
 gem 'bundler'
 gem 'rake'
 gem 'hanami',       '~> 0.8'
@@ -25,5 +27,5 @@ group :test do
 end
 
 group :production do
-  # gem 'puma'
+  gem 'puma'
 end
