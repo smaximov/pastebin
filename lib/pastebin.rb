@@ -1,46 +1,30 @@
 # frozen_string_literal: true
 require 'hanami/model'
 require 'hanami/mailer'
+require 'sequel'
+
 Dir["#{__dir__}/pastebin/**/*.rb"].each { |file| require_relative file }
 
 Hanami::Model.configure do
-  ##
-  # Database adapter
-  #
-  # Available options:
-  #
-  #  * File System adapter
-  #    adapter type: :file_system, uri: 'file:///db/bookshelf_development'
-  #
-  #  * Memory adapter
-  #    adapter type: :memory, uri: 'memory://localhost/pastebin_development'
-  #
-  #  * SQL adapter
-  #    adapter type: :sql, uri: 'sqlite://db/pastebin_development.sqlite3'
-  #    adapter type: :sql, uri: 'postgres://localhost/pastebin_development'
-  #    adapter type: :sql, uri: 'mysql://localhost/pastebin_development'
-  #
   adapter type: :sql, uri: ENV['DATABASE_URL']
 
-  ##
-  # Migrations
-  #
+  Sequel.database_timezone = :utc
+  Sequel.application_timezone = :local
+
   migrations 'db/migrations'
   schema     'db/schema.sql'
 
-  ##
-  # Database mapping
-  #
-  # Intended for specifying application wide mappings.
-  #
   mapping do
-    # collection :users do
-    #   entity     User
-    #   repository UserRepository
-    #
-    #   attribute :id,   Integer
-    #   attribute :name, String
-    # end
+    collection :pastes do
+      entity Paste
+      repository PasteRepository
+
+      attribute :id, Integer
+      attribute :content, String
+      attribute :token, String
+      attribute :created_at, DateTime
+      attribute :updated_at, DateTime
+    end
   end
 end.load!
 
