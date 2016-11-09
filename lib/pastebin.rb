@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 require 'hanami/model'
 require 'hanami/mailer'
-Dir["#{ __dir__ }/pastebin/**/*.rb"].each { |file| require_relative file }
+Dir["#{__dir__}/pastebin/**/*.rb"].each { |file| require_relative file }
 
 Hanami::Model.configure do
   ##
@@ -44,7 +45,7 @@ Hanami::Model.configure do
 end.load!
 
 Hanami::Mailer.configure do
-  root "#{ __dir__ }/pastebin/mailers"
+  root "#{__dir__}/pastebin/mailers"
 
   # See http://hanamirb.org/guides/mailers/delivery
   delivery do

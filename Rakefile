@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rake'
 require 'hanami/rake_tasks'
 
@@ -6,4 +7,6 @@ begin
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
 rescue LoadError
+  # We don't have RSpec in production.
+  raise unless Hanami.env == 'production'
 end

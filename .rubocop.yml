@@ -1,0 +1,23 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.3
+
+# Lints
+
+# Metrics
+
+Metrics/LineLength:
+  AllowHeredoc: true
+  AllowURI: true
+  IgnoreCopDirectives: true
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - "apps/web/application.rb"
+
+# Style
+
+Style/Documentation:
+  Enabled: false
