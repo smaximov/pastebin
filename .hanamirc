@@ -1,0 +1,4 @@
+project=pastebin
+architecture=container
+test=rspec
+template=slim
