@@ -91,6 +91,9 @@ module Api
       #
       default_response_format :text
 
+      # See https://gitter.im/hanami/chat?at=58235cbac2c2b0744e339ac9
+      controller.format text: 'text/plain'
+
       # HTTP Body parsers
       # Parse non GET responses body for a specific mime type
       # Argument: Symbol, which represent the format of the mime type (only `:json` is supported)

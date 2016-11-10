@@ -4,7 +4,7 @@ require_relative '../../../../apps/api/views/pastes/create'
 RSpec.describe Api::Views::Pastes::Create do
   let(:paste) { Paste.new(id: 42, content: 'some content', token: 'some token') }
   let(:exposures) { Hash[paste: paste] }
-  let(:template)  { Hanami::View::Template.new('apps/api/templates/pastes/create.conf.erb') }
+  let(:template)  { Hanami::View::Template.new('apps/api/templates/pastes/create.text.erb') }
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }
 
