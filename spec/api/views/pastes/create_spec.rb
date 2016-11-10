@@ -8,10 +8,6 @@ RSpec.describe Api::Views::Pastes::Create do
   let(:view)      { described_class.new(template, exposures) }
   let(:rendered)  { view.render }
 
-  it 'exposes #paste' do
-    expect(view.paste).to eq exposures.fetch(:paste)
-  end
-
   it 'displays the URL of the paste' do
     expect(rendered).to match(%r{/api/pastes/42})
   end
