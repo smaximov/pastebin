@@ -1,6 +1,9 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
   TargetRubyVersion: 2.3
 
 # Lints
