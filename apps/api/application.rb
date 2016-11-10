@@ -307,9 +307,9 @@ module Api
     # PRODUCTION
     #
     configure :production do
-      # scheme 'https'
-      # host   'example.org'
-      # port   443
+      scheme 'https'
+      host   'hanami-pastebin.herokuapp.com'
+      port   443
 
       # Logger
       # See: http://hanamirb.org/guides/applications/logging
