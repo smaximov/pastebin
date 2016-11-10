@@ -1,0 +1,16 @@
+language: ruby
+sudo: false
+rvm:
+  - 2.3.1
+  - ruby-head
+cache: bundler
+script:
+  - bundle exec rubocop
+  - bundle exec rake spec
+before_script:
+  - bundle exec hanami db prepare
+env:
+  - HANAMI_ENV=test
+matrix:
+  allow_failures:
+    - rvm: ruby-head
