@@ -110,9 +110,9 @@ module Api
       # TEMPLATES
       #
 
-      # The layout to be used by all views
+      # Turn off layouts
       #
-      layout :application # It will load Api::Views::ApplicationLayout
+      layout nil
 
       # The relative path to templates
       #

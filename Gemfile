@@ -10,8 +10,6 @@ gem 'hanami-model', '~> 0.6'
 
 gem 'pg'
 
-gem 'slim'
-
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/applications/code-reloading
