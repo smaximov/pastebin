@@ -7,19 +7,14 @@ module Api::Controllers::Pastes
       required(:content).filled(:str?)
     end
 
-    before :validate
-
     expose :paste
 
     def call(params)
+      halt 422 unless params.valid?
       @paste = PasteRepository.create(Paste.new(content: params[:content], token: generate_token))
     end
 
     private
-
-    def validate
-      halt 422 unless params.valid?
-    end
 
     def generate_token
       SecureRandom.hex(8)
