@@ -19,6 +19,7 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Exclude:
     - "apps/*/application.rb"
+    - "spec/**/*.rb"
 
 # Style
 
