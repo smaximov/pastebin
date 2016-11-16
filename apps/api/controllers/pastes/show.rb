@@ -5,8 +5,12 @@ module Api::Controllers::Pastes
 
     expose :paste
 
+    def initialize(repository: PasteRepository.new)
+      @repository = repository
+    end
+
     def call(params)
-      @paste = PasteRepository.find(params[:id])
+      @paste = @repository.find(params[:id])
       halt 404 if @paste.nil?
     end
   end

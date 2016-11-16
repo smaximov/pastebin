@@ -2,7 +2,8 @@
 require_relative '../../../../apps/api/controllers/pastes/update'
 
 RSpec.describe Api::Controllers::Pastes::Update do
-  let(:action) { described_class.new }
+  let(:repository) { instance_double(PasteRepository) }
+  let(:action) { described_class.new(repository: repository) }
   let(:id) { 42 }
   let(:access_token) { 'token' }
   let(:content) { 'new content' }
@@ -30,8 +31,7 @@ RSpec.describe Api::Controllers::Pastes::Update do
 
   context 'with valid params' do
     before do
-      allow(PasteRepository).to receive(:find).with(id).and_return(paste)
-      expect(PasteRepository).to receive(:find).with(id)
+      expect(repository).to receive(:find).with(id).with(id).and_return(paste)
     end
 
     context 'with a non-existing paste' do
@@ -48,6 +48,10 @@ RSpec.describe Api::Controllers::Pastes::Update do
 
       context 'with a matching access token' do
         let(:access_token) { 'deadbeef' }
+
+        before do
+          expect(repository).to receive(:update).with(id, content: params[:content])
+        end
 
         it 'is 204 No Content' do
           response = action.call(params)

@@ -9,16 +9,19 @@ module Api::Controllers::Pastes
       required(:content).filled(:str?)
     end
 
+    def initialize(repository: PasteRepository.new)
+      @repository = repository
+    end
+
     def call(params)
       halt 422 unless params.valid?
 
-      paste = PasteRepository.find(params[:id])
+      paste = @repository.find(params[:id])
 
       halt 404 if paste.nil?
       halt 403 unless paste.token == params[:access_token]
 
-      paste.update(content: params[:content], updated_at: Time.now)
-      PasteRepository.update(paste)
+      @repository.update(paste.id, content: params[:content])
       self.status = 204
     end
   end

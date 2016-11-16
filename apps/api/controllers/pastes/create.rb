@@ -9,9 +9,13 @@ module Api::Controllers::Pastes
 
     expose :paste
 
+    def initialize(repository: PasteRepository.new)
+      @repository = repository
+    end
+
     def call(params)
       halt 422 unless params.valid?
-      @paste = PasteRepository.create(Paste.new(content: params[:content], token: generate_token))
+      @paste = @repository.create(content: params[:content], token: generate_token)
     end
 
     private

@@ -1,4 +1,3 @@
 # frozen_string_literal: true
-class PasteRepository
-  include Hanami::Repository
+class PasteRepository < Hanami::Repository
 end

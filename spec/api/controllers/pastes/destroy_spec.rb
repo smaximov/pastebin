@@ -2,7 +2,8 @@
 require_relative '../../../../apps/api/controllers/pastes/destroy'
 
 RSpec.describe Api::Controllers::Pastes::Destroy do
-  let(:action) { described_class.new }
+  let(:repository) { instance_double(PasteRepository) }
+  let(:action) { described_class.new(repository: repository) }
   let(:id) { 42 }
   let(:access_token) { 'token' }
   let(:params) { Hash[id: 42, access_token: access_token] }
@@ -20,8 +21,7 @@ RSpec.describe Api::Controllers::Pastes::Destroy do
 
   context 'with valid params' do
     before do
-      allow(PasteRepository).to receive(:find).with(id).and_return(paste)
-      expect(PasteRepository).to receive(:find).with(id)
+      expect(repository).to receive(:find).with(id).and_return(paste)
     end
 
     context 'with a non-existing paste' do
@@ -38,6 +38,10 @@ RSpec.describe Api::Controllers::Pastes::Destroy do
 
       context 'with a matching access token' do
         let(:access_token) { 'deadbeef' }
+
+        before do
+          expect(repository).to receive(:delete).with(id)
+        end
 
         it 'is 204 No Content' do
           response = action.call(params)
